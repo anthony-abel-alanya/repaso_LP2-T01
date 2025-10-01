@@ -1,0 +1,77 @@
+-- 1. Eliminar la base de datos si existe
+DROP DATABASE IF EXISTS practicalp2;
+
+-- 2. Crear la base de datos
+CREATE DATABASE practicalp2;
+
+-- 3. Seleccionar la base de datos
+USE practicalp2;
+
+-- 4. Crear tabla categoria
+CREATE TABLE categoria (
+    id_categoria INT NOT NULL PRIMARY KEY,
+    descripcion VARCHAR(100),
+    nombre VARCHAR(50)
+);
+
+-- 5. Crear tabla plataforma
+CREATE TABLE plataforma (
+    id_plataforma INT NOT NULL PRIMARY KEY,
+    fabricante VARCHAR(50),
+    nombre VARCHAR(50)
+);
+
+-- 6. Crear tabla proveedor
+CREATE TABLE proveedor (
+    id_proveedor INT NOT NULL PRIMARY KEY,
+    email VARCHAR(100),
+    nombre VARCHAR(100),
+    telefono VARCHAR(15)
+);
+
+-- 7. Crear tabla videojuego
+CREATE TABLE videojuego (
+    id_juego VARCHAR(10) NOT NULL PRIMARY KEY,
+    id_categoria INT NOT NULL,
+    id_plataforma INT NOT NULL,
+    id_proveedor INT NOT NULL,
+    precio DOUBLE NOT NULL,
+    stock INT NOT NULL,
+    titulo VARCHAR(100),
+    
+    -- Claves foráneas
+    FOREIGN KEY (id_categoria) REFERENCES categoria(id_categoria),
+    FOREIGN KEY (id_plataforma) REFERENCES plataforma(id_plataforma),
+    FOREIGN KEY (id_proveedor) REFERENCES proveedor(id_proveedor)
+);
+
+-- 8. Insertar datos en categoria
+INSERT INTO categoria (id_categoria, nombre, descripcion) VALUES
+(1, 'Acción', 'Juegos de acción'),
+(2, 'Aventura', 'Juegos de exploración y narrativa'),
+(3, 'Deportes', 'Juegos relacionados con actividades deportivas'),
+(4, 'Estrategia', 'Juegos que requieren planificación y toma de decisiones');
+
+-- 9. Insertar datos en plataforma
+INSERT INTO plataforma (id_plataforma, nombre, fabricante) VALUES
+(1, 'PC', 'Microsoft'),
+(2, 'PlayStation 5', 'Sony'),
+(3, 'Xbox Series X', 'Microsoft'),
+(4, 'Nintendo Switch', 'Nintendo');
+
+-- 10. Insertar datos en proveedor
+INSERT INTO proveedor (id_proveedor, nombre, telefono, email) VALUES
+(1, 'Proveedor X', '123456789', 'contacto@proveedorx.com'),
+(2, 'Proveedor Y', '987654321', 'ventas@proveedory.com'),
+(3, 'Games Distribution', '555123456', 'info@gamesdist.com'),
+(4, 'MegaProveedores', '444333222', 'soporte@megaproveedores.com');
+
+-- 11. Insertar datos en videojuego
+INSERT INTO videojuego (id_juego, id_categoria, id_plataforma, id_proveedor, precio, stock, titulo) VALUES
+('J001', 1, 1, 1, 59.99, 10, 'Call of Action'),
+('J002', 2, 2, 2, 49.99, 5, 'Lost Adventures'),
+('J003', 3, 3, 3, 39.99, 20, 'FIFA 25'),
+('J004', 4, 4, 4, 29.99, 15, 'War Strategy X');
+
+-- 12. Verificar contenido
+SELECT * FROM videojuego;
